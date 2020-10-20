@@ -1,3 +1,9 @@
+<!-- HABILITAR EL SIGUIENTE TALLER ESTA EN TALLER 3
+HABILITAR EL BOTON DEL VIDEO
+CREAR EL AREGLO DE PREGUNTAS Y RESPUESTAS EN LA EVALUACION
+HACER CAMBIOS EN EL DATATABLE DE ACUERDO A LO QUE QUE QUIERE VISUALIZAR
+
+-->
 <?php
 if (!$this->session->userdata('is_logged')) {
     redirect(base_url());
@@ -5,7 +11,7 @@ if (!$this->session->userdata('is_logged')) {
 ?>
 <?php $taller1 = $this->session->userdata('taller1') ?> 
 <?php $taller2 = $this->session->userdata('taller2') ?> 
-<?php $taller3 = $this->session->userdata() ?> 
+<?php $taller3 = $this->session->userdata('taller3') ?> 
 <?php $taller4 = $this->session->userdata() ?> 
 
 <html>
@@ -16,7 +22,6 @@ if (!$this->session->userdata('is_logged')) {
         <link rel="stylesheet" href="assets/plugins/video/estilo.css">
     </head>
     <body>
-
         <style>
             body{
 
@@ -113,7 +118,7 @@ if (!$this->session->userdata('is_logged')) {
                                         </p>
                                     <?php else: ?>
                                         <p>
-                                            <button  id="btnVerVideo" class="btn btn-dark mb-3" value="taller1">ACCEDER AL CURSO</button>
+                                            <button  id="btnVerVideo" class="btn btn-dark mb-3" value="taller1">NO DISPONIBLE</button>
                                             <span class="text-success" id="idEstado"></span>
                                         </p>
                                     <?php endif; ?>
@@ -133,7 +138,7 @@ if (!$this->session->userdata('is_logged')) {
                                         </p>
                                     <?php else: ?>
                                         <p>
-                                            <button  id="btnVerVideo2"class="btn btn-dark mb-3" value="taller2" >ACCEDER AL CURSO</button>
+                                            <button  id="btnVerVideo2"class="btn btn-dark mb-3" value="taller2" >NO DISPONIBLE</button>
                                             <span class="text-success" id="idEstado2"></span>
                                         </p>
                                     <?php endif; ?>
@@ -143,8 +148,8 @@ if (!$this->session->userdata('is_logged')) {
                         <div class="col-sm-12 col-md-3">
                             <div class=" cont-second">
                                 <div class="thumbnail">
-                                    <img src="img/tachos.jpg">
-                                    <h5>MANEJO DE DESECHOS</h5>
+                                    <img src="img/mail.png">
+                                    <h5>BUEN USO DEL CORREO ELECTRÓNICO</h5>
 
                                     <?php if ($taller3 === '1'): ?>
                                         <p>
@@ -153,7 +158,7 @@ if (!$this->session->userdata('is_logged')) {
                                         </p>
                                     <?php else: ?>
                                         <p>
-                                            <button  id="btnVerVideo3"class="btn btn-dark mb-3"value="taller3" >NO DISPONIBLE</button>
+                                            <button  id="btnVerVideo3"class="btn btn-dark mb-3"value="taller3" >ACCEDER AL CURSO</button>
                                             <span class="text-success" id="idEstado3"></span>
                                         </p>
                                     <?php endif; ?>
@@ -164,7 +169,7 @@ if (!$this->session->userdata('is_logged')) {
                             <div class=" cont-second">
                                 <div class="thumbnail">
                                     <img src="img/manos.png">
-                                    <h5>AST</h5>
+                                    <h5>LAVADO DE MANOS</h5>
 
                                     <?php if ($taller4 === '1'): ?>
                                         <p>
@@ -207,8 +212,8 @@ if (!$this->session->userdata('is_logged')) {
                     }
                 };
 
-                $("#btnVerVideo").click(function () {
-                    var opc = $("#btnVerVideo").val();//esta variable debe tener el mismo nombre de la columna de la base de datos, para enviarle a la evaluacion y explicarle a que taller va a acceder
+                $("#btnVerVideo-").click(function () {
+                    var opc = $("#btnVerVideo").val();//esta variable debe estar alimentada con el mismo nombre de la columna de la base de datos, para enviarle a la evaluacion y explicarle a que taller va a acceder
                     opc = window.btoa(opc);
                     Swal.fire({
                         width: '85%',
@@ -227,7 +232,7 @@ if (!$this->session->userdata('is_logged')) {
 //                    var reproductor = videojs('fm-video', {fluid: true});
 
                 });
-                $("#btnVerVideo2").click(function () {
+                $("#btnVerVideo-2").click(function () {
                     var opc = $("#btnVerVideo2").val();//esta variable debe tener el mismo nombre de la columna de la base de datos, para enviarle a la evaluacion y explicarle a que taller va a acceder
                     opc = window.btoa(opc);
                     Swal.fire({
@@ -246,15 +251,15 @@ if (!$this->session->userdata('is_logged')) {
 //                    var reproductor = videojs('fm-video', {fluid: true});
 
                 });
-                $("#btnVerVideo3-").click(function () {
-                    var opc = $("#btnVerVideo3-").val();//esta variable debe tener el mismo nombre de la columna de la base de datos, para enviarle a la evaluacion y explicarle a que taller va a acceder
+                $("#btnVerVideo3").click(function () {
+                    var opc = $("#btnVerVideo3").val();//esta variable debe tener el mismo nombre de la columna de la base de datos, para enviarle a la evaluacion y explicarle a que taller va a acceder
                     opc = window.btoa(opc);
                     Swal.fire({
                         width: '85%',
                         allowOutsideClick: false,
                         allowEacapeKey: false,
                         showConfirmButton: false,
-                        html: '<video class="fm-video vjs-big-play-centered" autoplay="autoplay" id="idVideo"><source src="videos/haccp1.mp4" type="video/mp4"></video> <button class="btn btn-sm sombra" id="idControl" type="button" Value="Pause"onclick="reproducir()"><span id="idSpan"><i class="fas fa-pause"></i></span></button>',
+                        html: '<video class="fm-video vjs-big-play-centered" autoplay="autoplay" id="idVideo"><source src="videos/correos.mp4" type="video/mp4"></video> <button class="btn btn-sm sombra" id="idControl" type="button" Value="Pause"onclick="reproducir()"><span id="idSpan"><i class="fas fa-pause"></i></span></button>',
 //                        html: '<video class="fm-video video-js vjs-big-play-centered" autoplay="autoplay" controls id="fm-video"><source src="videos/haccp1.mp4" type="video/mp4"></video> ',
                         footer: '<span id="idEvaluar"></span>'
                     }
@@ -320,7 +325,7 @@ if (!$this->session->userdata('is_logged')) {
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Evaluacion 1</th>
-                                        <th>Evaluacion 2</th>
+                                        <!--<th>Evaluacion 2</th>-->
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -328,7 +333,7 @@ if (!$this->session->userdata('is_logged')) {
                                         <th>Buscar</th>
                                         <th>Buscar</th>
                                         <th>Buscar</th>
-                                        <th>Buscar</th>
+                                        <!--<th>Buscar</th>-->
                                     </tr>
                                 </tfoot>
                                 <tbody id="idTableBody">
@@ -408,24 +413,36 @@ if (!$this->session->userdata('is_logged')) {
                             columns: [
                                 {data: 'nombre'},
                                 {data: 'apellido'},
-                                {data: 'taller1'},
-                                {data: 'taller2'}
+//                                {data: 'taller1'},
+//                                {data: 'taller2'},
+                                {data: 'taller3'}
                             ],
                             columnDefs: [
+//                                {
+//                                    targets: [2],
+//                                    data: 'taller1',
+//                                    render: function (data, type, row) {
+//                                        if (data === '0') {
+//                                            return '<span class="bg-warning text-white">Pendiente</span>';
+//                                        } else {
+//                                            return '<span class="bg-info text-white">Aprobado</span>';
+//                                        }
+//                                    }
+//                                },
+//                                {
+//                                    targets: [3],
+//                                    data: 'taller2',
+//                                    render: function (data, type, row) {
+//                                        if (data === '0') {
+//                                            return '<span class="bg-warning text-white">Pendiente</span>';
+//                                        } else {
+//                                            return '<span class="bg-info text-white">Aprobado</span>';
+//                                        }
+//                                    }
+//                                },
                                 {
                                     targets: [2],
-                                    data: 'taller1',
-                                    render: function (data, type, row) {
-                                        if (data === '0') {
-                                            return '<span class="bg-warning text-white">Pendiente</span>';
-                                        } else {
-                                            return '<span class="bg-info text-white">Aprobado</span>';
-                                        }
-                                    }
-                                },
-                                {
-                                    targets: [3],
-                                    data: 'taller2',
+                                    data: 'taller3',
                                     render: function (data, type, row) {
                                         if (data === '0') {
                                             return '<span class="bg-warning text-white">Pendiente</span>';

@@ -61,9 +61,9 @@ if (!$this->session->userdata('is_logged')) {
 //    var taller = obtenerParametro();
 
     //Obtenemos en la variable $taller el parametro ENCRIPTADO que viene por la URL 
-    <?php $taller = base64_decode($_GET['opc']); ?>
+<?php $taller = base64_decode($_GET['opc']); ?>
     //Pasamos el valor de la variable $taller de php a la variable taller de js
-    var taller = "<?=$taller; ?>"
+    var taller = "<?= $taller; ?>"
 
     //De acuerdo al parametro cargo la evaluacion, por ejemplo si por parametro viene (taller1, cargo la evaluacion del taller 1)
     if (taller === 'taller1') {
@@ -82,7 +82,17 @@ if (!$this->session->userdata('is_logged')) {
                 {'pregunta': '¿Quién pintó Las meninas?', 'respuesta': ['Francisco de Goya', 'TU', 'Diego Velázquez']},
                 {'pregunta': '¿Cada que tiempo se lava las manos?', 'respuesta': ['Cada hora', 'Cada 30 M', 'Cada cambio de actividad']}
             ]
-        }//aqui continuara el taller 3.....
+        } else {
+            if (taller === 'taller3') {
+                cuestionario = [
+                    {'pregunta': 'Que es un correo electronico?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
+                    {'pregunta': 'Selecione un correo no personal?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
+                    {'pregunta': '¿Que debo hacer si me sale recordar contrasenia?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
+                    {'pregunta': '¿Selecione una norma de correos?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']}
+                ]
+            }
+        }
+        //aqui continuara el taller 3.....
 
     }
 
@@ -111,7 +121,17 @@ if (!$this->session->userdata('is_logged')) {
                     {'respuesta': ['Cada cambio de actividad']}
                 ]
 
+            } else {
+                if (taller === 'taller3') {
+                    respuestasCorrectas = [
+                        {'respuesta': ['RESPUESTA 1']},
+                        {'respuesta': ['RESPUESTA 1']},
+                        {'respuesta': ['RESPUESTA 1']},
+                        {'respuesta': ['RESPUESTA 1']}
+                    ]
+                }
             }
+            //aqui continuara el taller 3.....
         }
 
 
@@ -217,7 +237,7 @@ if (!$this->session->userdata('is_logged')) {
             console.log(arraySeleccion);
         }
         comparoRespuestas(arraySeleccion);
-        respCorretas(); //LLAMADO AL METODO ADICIONAL SOLO PARA MOSTRAR EN PANTALLA LAS RESPUESTAS CORRECTAS
+//        respCorretas(); //LLAMADO AL METODO ADICIONAL SOLO PARA MOSTRAR EN PANTALLA LAS RESPUESTAS CORRECTAS
     }
 
     //METODO PARA MOSTRAR EN PANTALLA EL TOTAL DE CORRECTAS E INCORRECTAS
@@ -273,7 +293,7 @@ if (!$this->session->userdata('is_logged')) {
                         <h2>RESULTADOS</h2>
                     </div>
                     <hr>
-                    <div class="alert alert-info"><label  class="my-3"><span id="idRespuesta"></span></label><br></div>
+                    <!--<div class="alert alert-info"><label  class="my-3"><span id="idRespuesta"></span></label><br></div>--Habilitar junto con el metodo  en caso de querer mostrar las respuestas correctas-->
                     <div class="alert alert-success"><label>TOTAL DE ACIERTOS: <span id="idContC"  name="contc"/>0</span></label><br></div>
                     <div class="alert alert-danger"><label>TOTAL DE INCORRECTAS: <span id="idContI"  name="conti"/>0</span></label><br></div>
                     <div class="alert alert-dark text-center"><label>Su puntuación es: <span id="idPuntuacion"  name="puntuacion"/></span>/10</label>    
@@ -300,7 +320,7 @@ if (!$this->session->userdata('is_logged')) {
                     type: 'ajax',
                     method: 'POST',
                     url: "<?php echo base_url(); ?>eval_controller/cambiarEstado",
-                    data: {id:<?= $idUser ?>, taller:"<?=$taller?>"},//Tienes que tener en cuenta que si se trata del tipo string debes hacerlo entre comillas
+                    data: {id:<?= $idUser ?>, taller: "<?= $taller ?>"}, //Tienes que tener en cuenta que si se trata del tipo string debes hacerlo entre comillas
                     dataType: 'json',
                     success: function (responce) {
                         if (responce) {
@@ -326,7 +346,7 @@ if (!$this->session->userdata('is_logged')) {
                     window.location.href = "<?php echo base_url() ?>opciones_controller";
                 });
 
-            }       
+            }
 
         });
 
