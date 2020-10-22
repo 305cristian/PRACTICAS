@@ -146,7 +146,7 @@ if (!$this->session->userdata('is_logged')) {
                         if (response.success) {
                             $('#tblUsuarios').DataTable().destroy();
                             mostrarDatosDataTable();
-
+                            resetearFormu();
                             $('#modalUsuario').modal('hide');
                             $('.modal-backdrop').remove();
 

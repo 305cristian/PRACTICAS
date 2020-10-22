@@ -12,6 +12,7 @@ if (!$this->session->userdata('is_logged')) {
 <?php $taller1 = $this->session->userdata('taller1') ?> 
 <?php $taller2 = $this->session->userdata('taller2') ?> 
 <?php $taller3 = $this->session->userdata('taller3') ?> 
+<?php $taller4 = $this->session->userdata('') ?> 
 
 <html>
     <head>
@@ -173,7 +174,7 @@ if (!$this->session->userdata('is_logged')) {
                                     <?php if ($taller4 === '1'): ?>
                                         <p>
                                             <button disabled id="btnVerVideo4"class="btn btn-dark mb-3" >ACCEDER AL CURSO</button>
-                                            <span class="text-success" id="idEstado">Aprobado</span>
+                                          
                                         </p>
                                     <?php else: ?>
                                         <p>
@@ -302,11 +303,11 @@ if (!$this->session->userdata('is_logged')) {
 
             });
 
-            $(function () {
-                $(document).bind("contextmenu", function (e) {
-                    return false;
-                });
-            });
+//            $(function () {
+//                $(document).bind("contextmenu", function (e) {
+//                    return false;
+//                });
+//            });
         </script>
 
         <!--Inicio Modal Resultados-->
