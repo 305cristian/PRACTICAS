@@ -13,7 +13,6 @@ if (!$this->session->userdata('is_logged')) {
 <?php $taller2 = $this->session->userdata('taller2') ?> 
 <?php $taller3 = $this->session->userdata('taller3') ?> 
 
-
 <html>
     <head>
 
