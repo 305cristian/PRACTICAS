@@ -52,5 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login_controller';
 $route['evaluacion_controller'] = 'eval_controller/evaluacion';
 $route['opciones_controller'] = 'eval_controller/opciones';
+$route['tar_controller'] = 'tarea_controller/tareas';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

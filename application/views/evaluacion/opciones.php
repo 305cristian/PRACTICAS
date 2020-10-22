@@ -12,7 +12,7 @@ if (!$this->session->userdata('is_logged')) {
 <?php $taller1 = $this->session->userdata('taller1') ?> 
 <?php $taller2 = $this->session->userdata('taller2') ?> 
 <?php $taller3 = $this->session->userdata('taller3') ?> 
-<?php $taller4 = $this->session->userdata() ?> 
+
 
 <html>
     <head>
@@ -72,12 +72,12 @@ if (!$this->session->userdata('is_logged')) {
                 box-shadow: 0px 0px 11px #007bff;
                 color: #7abaff
             }
-      
+
 
 
         </style>
 
-       
+
         <!--Inicio Modal soporte-->
         <div id="modalSoporte" class="modal fade" data-backdrop=static data-keyboard=false>
             <div class="modal-dialog">
@@ -113,8 +113,8 @@ if (!$this->session->userdata('is_logged')) {
                                     <h5>BPM BUENAS PRACTICAS</h5>
                                     <?php if ($taller1 === '1'): ?>
                                         <p>
-                                            <button disabled id="btnVerVideo"class="btn btn-dark mb-3" >ACCEDER AL CURSO</button>
-                                            <span class="text-success" id="idEstado">Aprobado</span>
+                                            <button disabled id="btnVerVideo"class="btn btn-dark mb-3" >CURSO APROBADO</button>
+                                            <!--<span class="text-success" id="idEstado">Aprobado</span>-->
                                         </p>
                                     <?php else: ?>
                                         <p>
@@ -133,8 +133,8 @@ if (!$this->session->userdata('is_logged')) {
 
                                     <?php if ($taller2 === '1'): ?>
                                         <p>
-                                            <button disabled id="btnVerVideo2"class="btn btn-dark mb-3" >ACCEDER AL CURSO</button>
-                                            <span class="text-success" id="idEstado">Aprobado</span>
+                                            <button disabled id="btnVerVideo2"class="btn btn-dark mb-3" >CURSO APROBADO</button>
+                                            <!--<span class="text-success" id="idEstado">Aprobado</span>-->
                                         </p>
                                     <?php else: ?>
                                         <p>
@@ -153,12 +153,12 @@ if (!$this->session->userdata('is_logged')) {
 
                                     <?php if ($taller3 === '1'): ?>
                                         <p>
-                                            <button disabled id="btnVerVideo3"class="btn btn-dark mb-3" >ACCEDER AL CURSO</button>
-                                            <span class="text-success" id="idEstado">Aprobado</span>
+                                            <button disabled id="btnVerVideo3"class="btn btn-dark mb-3" >CURSO APROBADO</button>
+                                            <!--<span style="color: yellowgreen"  id="idEstado">Aprobado</span>-->
                                         </p>
                                     <?php else: ?>
                                         <p>
-                                            <button  id="btnVerVideo3"class="btn btn-dark mb-3"value="taller3" >ACCEDER AL CURSO</button>
+                                            <button  id="btnVerVideo3"class="btn btn-primary mb-3"value="taller3" >ACCEDER AL CURSO</button>
                                             <span class="text-success" id="idEstado3"></span>
                                         </p>
                                     <?php endif; ?>

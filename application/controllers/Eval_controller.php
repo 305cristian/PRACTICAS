@@ -20,6 +20,13 @@ class Eval_controller extends CI_Controller {
         $this->load->helper('url');
     }
 
+     public function tareas() {
+
+        $this->load->view('evaluacion/head');
+        $this->load->view('evaluacion/header');
+        $this->load->view('tareas/tareas');
+        $this->load->view('evaluacion/footer');
+    }
      public function opciones() {
 
         $this->load->view('evaluacion/head');

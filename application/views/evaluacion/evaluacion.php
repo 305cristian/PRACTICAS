@@ -9,7 +9,7 @@ if (!$this->session->userdata('is_logged')) {
     <div class="modal-dialog modal-lg col-md-12">
         <div class="modal-content">
             <div class="modal-header bg-info">
-                <h1 class="display-4 font-weight-bold font-italic " >EVALUACION</h1>
+                <h1 class="display-4 font-weight-bold font-italic " >EVALUACIÓN</h1>
                 <span id="contador" class="font-weight-bold">Tiempo: </span>
             </div>
             <div class="modal-body alinear">
@@ -18,7 +18,7 @@ if (!$this->session->userdata('is_logged')) {
                 </form>
 
             </div>
-            <div class="modal-footer bg-info">
+            <div class="modal-footer bg-info ">
                 <input class="btn btn-success" type="button" value="Enviar Respuestas" id="idEnviar" />
             </div>
 
@@ -85,10 +85,13 @@ if (!$this->session->userdata('is_logged')) {
         } else {
             if (taller === 'taller3') {
                 cuestionario = [
-                    {'pregunta': 'Que es un correo electronico?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
-                    {'pregunta': 'Selecione un correo no personal?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
-                    {'pregunta': '¿Que debo hacer si me sale recordar contrasenia?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']},
-                    {'pregunta': '¿Selecione una norma de correos?', 'respuesta': ['RESPUESTA 1', 'RESPUESTA 2', 'RESPUESTA 3']}
+                    {'pregunta': 'De los siguientes ejemplos ¿Cual es un correo no personalizado?', 'respuesta': ['manuel.jose@cateringclp.com', 'contabilidad.clp@cateringclp.com', 'luis.994@cateringclp.com']},
+                    {'pregunta': 'Antes de enviar un correo electrónico debo:?', 'respuesta': ['Revisar las faltas ortográficas y de gramática.', 'Que esté redactado en texto puro.', 'Si adjunto un archivo, revisar que el archivo adjunto sea para el destinatario.','Todas son correctas.']},
+                    {'pregunta': '¿Porque es impórtate utilizar el campo asunto?', 'respuesta': ['Para que el destinatario, a simple vista, puede decidir si leer o no un correo electrónico.', 'Por que es un campo obligatorio., caso contrario no se envía el mensaje.', 'Por normativas de la empresa.','Ninguna es correcta.']},
+                    {'pregunta': '¿Por que no debemos redactar un correo electrónico en mayúsculas?', 'respuesta': ['Por qué escribir en mayúsculas en Internet equivale a gritar.', 'Por qué escribir en mayúsculas hace que el correo sea más pesado.', 'Las 2 son correctas.']},
+                    {'pregunta': '¿Reenviar correos en cadena es una buena práctica?', 'respuesta': ['SI, por que puedo ver toda la cadena de mensajes que me han llegado.', 'NO, porque mientras más mensajes contenga más confuso se hace comprender el correo.']},
+                    {'pregunta': '¿Qué debo hacer cuando me llega un correo no deseado (San)?', 'respuesta': ['Archivarlo para leerlo más tarde.', 'Abrirlo y leer el contenido.', 'Borrarlo inmediatamente.']},
+                    {'pregunta': '¿Como debo estructurar una contraseña de correo electrónico?', 'respuesta': ['Mínimo 7 dígitos solo numeros.', 'Mínimo 4 dígitos con minusculas.', 'Mínimo 8 dígitos y combinar mayúsculas y minúsculas.']},
                 ]
             }
         }
@@ -124,10 +127,13 @@ if (!$this->session->userdata('is_logged')) {
             } else {
                 if (taller === 'taller3') {
                     respuestasCorrectas = [
-                        {'respuesta': ['RESPUESTA 1']},
-                        {'respuesta': ['RESPUESTA 1']},
-                        {'respuesta': ['RESPUESTA 1']},
-                        {'respuesta': ['RESPUESTA 1']}
+                        {'respuesta': ['contabilidad.clp@cateringclp.com']},
+                        {'respuesta': ['Todas son correctas.']},
+                        {'respuesta': ['Para que el destinatario, a simple vista, puede decidir si leer o no un correo electrónico.']},
+                        {'respuesta': ['Por qué escribir en mayúsculas en Internet equivale a gritar.']},
+                        {'respuesta': ['NO, porque mientras más mensajes contenga más confuso se hace comprender el correo.']},
+                        {'respuesta': ['Borrarlo inmediatamente.']},
+                        {'respuesta': ['Mínimo 8 dígitos y combinar mayúsculas y minúsculas.']}
                     ]
                 }
             }
@@ -142,9 +148,10 @@ if (!$this->session->userdata('is_logged')) {
         const  arraycodigoHtmlR = resp.map(respAct => `<p id="removeColor"><input value="${respAct}" name="resp` + i + `"  onClick="validadRespuesta('${respAct}',this,` + i + `)" type="radio">
                                                     <span>${respAct}</span>
                                                    </p>`);
+
         const codigoHtmlR = arraycodigoHtmlR.join('');//obtenemos el valor del arraycodigoHtmlR a la variable codigoHtmlR 
 
-        let codigoHtmlP = `<p>${cuest.pregunta}</p><div class="ml-5">${codigoHtmlR}</div><hr>`; //Concatenamos la pregunta con las posibles respuestas
+        let codigoHtmlP = `<p class="font-weight-bold">${i+1+') '+cuest.pregunta}</p><div class="ml-5">${codigoHtmlR}</div><hr>`; //Concatenamos la pregunta con las posibles respuestas
 
 //        document.querySelector('#formulario').innerHTML = codigoHtmlP; //pintamos el codigo html en el formulario
         document.getElementById('formulario').innerHTML += codigoHtmlP;
@@ -202,6 +209,7 @@ if (!$this->session->userdata('is_logged')) {
 // LLamamos al metodo mediante un bucle para que muestre en pantalla todas las preguntas
     for (var i = 0; i < cuestionario.length; i++) {
         mostrarCuestionario(i);
+
     }
 
 

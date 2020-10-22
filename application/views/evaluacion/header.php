@@ -83,6 +83,11 @@
                 <?php endif; ?>
                 <?php if ($rol === '1'): ?>
                     <li class="nav-item">
+                        <a class="nav-link " href="<?php echo base_url() ?>tar_controller">Tareas</a>
+                    </li>
+                <?php endif; ?>
+                <?php if ($rol === '1'): ?>
+                    <li class="nav-item">
                         <a id="idAprobados" class="nav-link " href="#">Resultados</a>
                     </li>
                 <?php endif; ?>
