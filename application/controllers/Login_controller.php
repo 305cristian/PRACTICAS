@@ -49,20 +49,20 @@ class Login_controller extends CI_Controller {
                 'user' => $resultado->usuario,
                 'taller1' => $resultado->taller1,
                 'taller2' => $resultado->taller2,
-                'taller3' => $resultado->taller2,
-                'taller4' => $resultado->taller2,
-                'taller5' => $resultado->taller2,
-                'taller6' => $resultado->taller2,
-                'taller7' => $resultado->taller2,
-                'taller8' => $resultado->taller2,
-                'taller9' => $resultado->taller2,
+                'taller3' => $resultado->taller3,
+                'taller4' => $resultado->taller4,
+                'taller5' => $resultado->taller5,
+                'taller6' => $resultado->taller6,
+                'taller7' => $resultado->taller7,
+                'taller8' => $resultado->taller8,
+                'taller9' => $resultado->taller9,
             );
 
             $this->session->set_userdata($datosUser);
 //            $this->session->set_flashdata('msg','Usuario: '.$datosUser['user']);
             echo json_encode($resultado);
         } else {
-            echo json_encode($resultado);
+//            echo json_encode($resultado);
         }
     }
 

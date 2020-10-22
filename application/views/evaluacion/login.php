@@ -108,7 +108,7 @@
             return true;
         }
     }
-</script>-->
+</script>
 <!--<form>
   <div class="form-group">
     <label for="exampleFormControlFile1">Example file input</label>

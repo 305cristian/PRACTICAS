@@ -12,8 +12,10 @@ if (!$this->session->userdata('is_logged')) {
 <?php $taller1 = $this->session->userdata('taller1') ?> 
 <?php $taller2 = $this->session->userdata('taller2') ?> 
 <?php $taller3 = $this->session->userdata('taller3') ?> 
+<?php $taller3n = $this->session->userdata('user') ?> 
 <?php $taller4 = $this->session->userdata('') ?> 
 
+<?php echo $taller3." ".$taller3n;?> 
 <html>
     <head>
 
@@ -303,11 +305,11 @@ if (!$this->session->userdata('is_logged')) {
 
             });
 
-//            $(function () {
-//                $(document).bind("contextmenu", function (e) {
-//                    return false;
-//                });
-//            });
+            $(function () {
+                $(document).bind("contextmenu", function (e) {
+                    return false;
+                });
+            });
         </script>
 
         <!--Inicio Modal Resultados-->
