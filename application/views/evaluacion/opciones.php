@@ -15,13 +15,13 @@ if (!$this->session->userdata('is_logged')) {
 <?php $taller3n = $this->session->userdata('user') ?> 
 <?php $taller4 = $this->session->userdata('') ?> 
 
-<?php echo $taller3." ".$taller3n;?> 
 <html>
     <head>
 
         <link rel="stylesheet" href="assets/plugins/video/video-js.css">
         <script src="assets/plugins/video/video.js"></script>
         <link rel="stylesheet" href="assets/plugins/video/estilo.css">
+        
     </head>
     <body>
         <style>
