@@ -28,8 +28,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- para vuejs-->
-<script src="assets/vuejs/axios.min.js"></script>
 <script src="assets/vuejs/vue.min.js"></script>
+<script src="assets/vuejs/axios.min.js"></script>
 <script src="assets/js/vueTarea.js"></script>
 
 <script src="assets/plugins/validacion.js"></script>

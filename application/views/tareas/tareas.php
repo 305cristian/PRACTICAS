@@ -1,7 +1,7 @@
 <?php
-if (!$this->session->userdata('is_logged')) {
-    redirect(base_url());
-}
+//if (!$this->session->userdata('is_logged')) {
+//    redirect(base_url());
+//}
 ?>
 <div id='app'>
     <div class="container my-5">
@@ -10,7 +10,7 @@ if (!$this->session->userdata('is_logged')) {
 
         <hr>
         <div class="table-responsive">
-            <table id="tblUsuarios" class="table table-striped dysplay nowrap" dellspacing="0" style="width: 100%">
+            <table id="tblTareas" class="table table-striped dysplay nowrap" dellspacing="0" style="width: 100%">
                 <thead>
                     <tr style="height: 18px; border: 2px; solid: #000000; background-color: #17a2b8; ">
                         <th>ID</th>
@@ -18,36 +18,34 @@ if (!$this->session->userdata('is_logged')) {
                         <th>IMAGEN</th>
                         <th>ACTIVIDAD</th>
                         <th>ESTADO</th>                  
+                        <th>ACCIONES</th>                  
                     </tr>
                 </thead>
 
                 <tbody id='tableBody'>
+                    <tr v-for='tarea of tareas'>
+                        <td>{{tarea.id}}</td>
+                        <td>{{tarea.task_nombre}}</td>
+                        <td>{{tarea.task_imagen}}</td>
+                        <td>{{tarea.task_contenido}}</td>
+                        <td>
+                            <span v-if=(tarea.task_estado=='Activo')>
+                                <div class="bg-success text-white text-center">Activo</div>
+                            </span>
+                            <span v-else>
+                                <div class="bg-danger text-white text-center">Inactivo</div>
+                            </span>
+                        </td>
+                        <td >
+                            <a href="#" class="btn btn-warning btn-sm " @click="obtenerTarea(tarea)" data-toggle="modal" data-target="#modalTareasAct"><li class="fa fa-edit"></li></a>
+                            <a href="#" class="btn btn-danger btn-sm "  @click="eliminarTarea(tarea)" ><li class="fa fa-trash-alt"></li></a>
+                        </td>   
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!--Inicio Modal soporte-->
-    <div id="modalSoporte" class="modal fade" data-backdrop=static data-keyboard=false>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1>Contactos</h1>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <p>
-                            <label>Telefono: 0992094788</label><br>
-                            <label>Correo: pcris.994@gmail.com</label>
-                        </p>
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mover" data-dismiss="modal">Cerrar</button>                    
-                </div>
-            </div>
-        </div>
-    </div>
     <!--Fin Modal soporte-->
 
     <div class="modal fade" role="dialog " id="modalTareas" data-backdrop=static data-keyboard=false>
@@ -60,41 +58,102 @@ if (!$this->session->userdata('is_logged')) {
                 </div>
                 <div class="modal-body ">
                     <!-- Aqui inicia el codigo de formulario modal NUEVO CLIENTE-->
-
                     <form class="container" id="formuInsertar">
                         <div class="row">
 
                             <label for="nombre" class="col-form-label col-md-5">Nombre de la Tarea</label>   
                             <input type="text"  id="nombre" name="txtNombre" class="form-control col-form-input col-md-7 text-uppercase"
-                                   :class="{'is-invalid':formValidacion.nombreTarea}"
-                                   v-model="nuevaTarea.nombreTarea">
+                                   :class="{'is-invalid':formValidacion.nombre}"
+                                   v-model="nuevaTarea.nombre">
                         </div>
                         <br>
                         <div class="row">
                             <label for="img" class="col-form-label col-md-2" >Imagen</label>
                             <input type="file" class="col-md-10" id="img" name="img" 
-                                   :class="{'is-invalid':formValidacion.imagenTarea}"
-                                   v-model="nuevaTarea.imagenTarea">
+                                   :class="{'is-invalid':formValidacion.imagen}"
+                                   v-model="nuevaTarea.imagen">
                         </div>
                         <br>
-                        <div class="row" >
-                            <label class="col-form-label col-md-4" >Estado:</label>
-                            <div class="btn-group  col-form-label col-md-8"  data-toggle="">
-                                <label for="idActivo" class="btn btn-info btn-sm " id="idAct">
-                                    <input type="radio" id="idActivo" v-model="nuevaTarea.estadoTarea" value="Activo" name="estado"  checked="">Activo
-                                </label>
-                                <label for="idInactivo" class="btn btn-info btn-sm " id="idInact"  >
-                                    <input  type="radio" id="idInactivo" v-model="nuevaTarea.estadoTarea" name="estado"  value="Inactivo" >Inactivo
-                                </label>                           
+                        <div class="row">                            
+                            <div class="form-group col-md-2">
+                                <label>Estado</label><br>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-dark " :class="{'active':(nuevaTarea.estado == 'Activo')}" 
+                                            @click="pincharEstado('Activo')"> Activo</button>
+
+                                    <button type="button" class="btn btn-outline-danger " :class="{'active': (nuevaTarea.estado == 'Inactivo')}" 
+                                            @click="pincharEstado('Inactivo')">Inactivo</button>
+                                </div>
+                                <div  class="text-danger"v-html="formValidacion.estado"></div>
                             </div>
-                            <span>Eligió: {{ nuevaTarea.estadoTarea}}</span>
                         </div>
 
 
                         <br>
                         <div class="row">
-                            <button type="button" class="btn btn-success float-center" id="idBtnInsertar" @click="agregarTarea()" >Insertar</button>
-                            <button type="button" onclick="" class="btn btn-danger ml-1" data-dismiss="modal" id="idBtnCancelar" >Cancelar</button>                    
+                            <button type="button" @click="insertarTarea()" class="btn btn-success float-center" id="idBtnInsertar"  >Insertar</button>
+                            <button type="button" @click='refrescarDatos()' class="btn btn-danger ml-1" data-dismiss="modal" id="idBtnCancelar" >Cancelar</button>                    
+                        </div>
+
+                    </form>
+
+                    <!-- Aqui termina el codigo de formulario modal NUEVO CLIENTE-->
+
+                </div>
+                <div class="modal-footer">
+                    <p id="modal-title">Registre una nueva tarea</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="modal fade" role="dialog " id="modalTareasAct" data-backdrop=static data-keyboard=false>
+        <div class="modal-dialog col-md-12">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <p class=" lead text-justify font-weight-bold"data-dismiss="modal" >Actualizar Tarea</p>     
+
+                </div>
+                <div class="modal-body ">
+                    <!-- Aqui inicia el codigo de formulario modal NUEVO CLIENTE-->
+                    <form class="container" id="formuInsertar">
+                        <div class="row">
+
+                            <label for="nombre" class="col-form-label col-md-5">Nombre de la Tarea</label>   
+                            <input type="text"  id="nombre" name="txtNombre" class="form-control col-form-input col-md-7 text-uppercase"
+                                   :class="{'is-invalid':formValidacion.nombre}"
+                                   v-model="actualizarTarea.task_nombre">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="img" class="col-form-label col-md-2" >Imagen</label>
+                            <input type="file" class="col-md-10" id="img" name="img" 
+                                   :class="{'is-invalid':formValidacion.imagen}"
+                                   v-model="actualizarTarea.task_imagen">
+                        </div>
+                        <br>
+                        <div class="row">                            
+                            <div class="form-group col-md-2">
+                                <label>Estado</label><br>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-dark " :class="{'active':(actualizarTarea.task_estado == 'Activo')}" 
+                                            @click="changeEstado('Activo')"> Activo</button>
+
+                                    <button type="button" class="btn btn-outline-danger " :class="{'active': (actualizarTarea.task_estado == 'Inactivo')}" 
+                                            @click="changeEstado('Inactivo')">Inactivo</button>
+                                </div>
+                                <div  class="text-danger"v-html="formValidacion.estado"></div>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="row">
+                            <button type="button" @click="agregarTarea()"class="btn btn-success float-center" id="idBtnInsertar"  >Insertar</button>
+                            <button type="button" @click='formValidacion=false,refrescarDatos()' class="btn btn-danger ml-1" data-dismiss="modal" id="idBtnCancelar" >Cancelar</button>                    
                         </div>
 
                     </form>
@@ -110,7 +169,7 @@ if (!$this->session->userdata('is_logged')) {
         </div>
     </div>
 </div>
-<!--FIN del modal NUEVO DOCENTE-->
+
 
 
 <script>

@@ -16,16 +16,26 @@ class Tarea_controller extends CI_Controller {
         $this->load->view('evaluacion/footer');
     }
 
+    public function obtenerTareas() {
+        $resultado['tareas'] = $this->Tarea_model->obtenerTareas();
+        echo json_encode($resultado);
+    }
+
     public function insertarTarea() {
         $validar = array(
             array(
-                'field' => 'nombreTarea',
-                'label' => 'NombreTarea',
+                'field' => 'nombre',
+                'label' => 'Nombre',
                 'rules' => 'trim|required'
             ),
             array(
-                'field' => 'imagenTarea',
-                'label' => 'ImagenTarea',
+                'field' => 'imagen',
+                'label' => 'Imagen',
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'estado',
+                'label' => 'Estado',
                 'rules' => 'trim|required'
             ),
         );
@@ -34,15 +44,16 @@ class Tarea_controller extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $respuesta['error'] = true;
             $respuesta['msg'] = array(
-                'nombreTarea' => form_error('nombreTarea'),
-                'imagenTarea' => form_error('imagenTarea'),
+                'nombre' => form_error('nombre'),
+                'imagen' => form_error('imagen'),
+                'estado' => form_error('estado'),
             );
         } else {
             $datos = array(
-                'task_nombre' => $this->input->post('nombreTarea'),
-                'task_imagen' => $this->input->post('imagenTarea'),
-                'task_contenido' => $this->input->post('contenidoTarea'),
-                'task_estado' => $this->input->post('estadoTarea')
+                'task_nombre' => $this->input->post('nombre'),
+                'task_imagen' => $this->input->post('imagen'),
+                'task_contenido' => $this->input->post('contenido'),
+                'task_estado' => $this->input->post('estado')
             );
             $resultado = $this->Tarea_model->insertarTarea($datos);
             if ($resultado) {

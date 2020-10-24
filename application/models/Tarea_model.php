@@ -17,8 +17,20 @@ class Tarea_model extends CI_Model {
         parent:: __construct();
     }
 
+    function obtenerTareas() {
+        $consulta = $this->db->select('*')
+                ->from('tareas')
+                ->get();
+        if ($consulta->num_rows() > 0) {         
+            return $consulta->result();
+        } else {         
+            return false;
+            
+        }
+    }
+
     public function insertarTarea($datos) {
-        $this->db ->insert('tareas', $datos);
+        $this->db->insert('tareas', $datos);
         if ($this->db->affected_rows() > 0) {
             return true;
         } else {
